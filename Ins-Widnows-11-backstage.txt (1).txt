@@ -1,0 +1,116 @@
+# STEP 1 — Install WSL (Run PowerShell as Administrator)
+
+wsl --install
+
+# Restart Windows after installation
+# STEP 2 — Install Ubuntu 22.04
+
+wsl --install -d Ubuntu-22.04
+
+# STEP 3 — Update Ubuntu
+
+sudo apt update && sudo apt upgrade -y
+
+# STEP 4 — Create Projects Folder
+
+mkdir -p ~/projects
+cd ~/projects
+
+# STEP 5 — Install Docker
+
+curl -fsSL https://get.docker.com | sudo sh
+
+# STEP 6 — Add Docker Permissions
+
+sudo usermod -aG docker $USER
+
+#Close Ubuntu terminal completely and reopen it.
+
+#Open Start Menu
+#Search for “Ubuntu 22.04”
+#Launch it again
+
+# STEP 7 — Verify Docker
+
+docker --version
+docker run hello-world
+
+# STEP 8 — Install NVM
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+source ~/.bashrc
+
+# STEP 9 — Install Node.js 22
+
+nvm install 22
+nvm use 22
+
+node -v
+npm -v
+
+# STEP 10 — Install Yarn
+
+corepack enable
+yarn set version stable
+
+yarn -v
+
+# STEP 11 — Install Build Tools
+
+sudo apt install -y build-essential python3 make g++
+
+# STEP 12 — Create Backstage App
+
+cd ~/projects
+
+npx @backstage/create-app@latest
+
+When prompted:
+
+Enter a name for the app: my-backstage
+
+# STEP 13 — Enter Project
+
+cd my-backstage
+
+# STEP 14 — Start Backstage
+
+yarn start
+
+Open in browser:
+
+http://localhost:3000
+
+Stop server:
+
+CTRL + C
+
+Start again later:
+
+cd ~/projects/my-backstage
+yarn start
+
+Useful commands:
+
+# Docker containers
+docker ps
+
+# Running ports
+sudo lsof -i -P -n
+
+# Memory usage
+free -h
+
+Fix Docker permission issue:
+
+newgrp docker
+docker run hello-world
+
+Verify Node version:
+
+node -v
+
+Switch Node version:
+
+nvm use 22
